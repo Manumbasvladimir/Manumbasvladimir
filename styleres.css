@@ -1,0 +1,71 @@
+/* Global Styles */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #000000;
+    color: #FFD700; /* Gold color */
+    margin: 0;
+    padding: 0;
+    text-align: center;
+}
+
+h2 {
+    color: #FFD700; /* Gold for the title */
+    margin-top: 50px;
+}
+
+form {
+    background-color: #222222; /* Dark background for form */
+    display: inline-block;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+}
+
+label {
+    display: block;
+    margin-bottom: 10px;
+    font-size: 1.1em;
+    color: #FFD700;
+}
+
+input, select, button {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 2px solid #FFD700; /* Gold border */
+    border-radius: 5px;
+    background-color: #333333; /* Slightly lighter dark background */
+    color: #FFD700;
+    font-size: 1em;
+}
+
+input[type="text"], input[type="password"], select {
+    width: 100%;
+}
+
+button {
+    background-color: #FFD700; /* Gold background for button */
+    color: black; /* Black text for contrast */
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #FFC107; /* Slightly lighter gold on hover */
+}
+
+button:active {
+    background-color: #FFB300; /* Darker gold on click */
+}
+
+/* Responsive Design for smaller screens */
+@media (max-width: 600px) {
+    form {
+        width: 90%;
+        padding: 20px;
+    }
+
+    input, select, button {
+        font-size: 1em;
+    }
+}
