@@ -1,22 +1,48 @@
-
 <?php
 if (isset($_POST['go_import'])) {
   header("Location: import.php");
-  exit(); // important!
+  exit();
 }
 ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Product</title>
-    <style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add Product</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #0d0d0d;
       color: #f1c40f;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    header {
+      background-color: #111;
+      color: #f1c40f;
+      padding: 20px;
+      text-align: center;
+      font-size: 24px;
+      font-weight: bold;
+      border-bottom: 1px solid #f1c40f;
+    }
+
+    main {
+      flex: 1;
       padding: 40px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
     }
 
     form {
@@ -25,7 +51,7 @@ if (isset($_POST['go_import'])) {
       border-radius: 12px;
       box-shadow: 0 0 15px rgba(241, 196, 15, 0.3);
       width: 400px;
-      margin: auto;
+      margin-bottom: 20px;
     }
 
     h2 {
@@ -38,7 +64,6 @@ if (isset($_POST['go_import'])) {
       display: block;
       margin-bottom: 8px;
       font-weight: 600;
-      color: #f1c40f;
     }
 
     select,
@@ -68,35 +93,54 @@ if (isset($_POST['go_import'])) {
     button:hover {
       background-color: #d4ac0d;
     }
+
+    footer {
+      background-color: #111;
+      color: #f1c40f;
+      text-align: center;
+      padding: 15px;
+      border-top: 1px solid #f1c40f;
+    }
   </style>
 </head>
 <body>
-<form action="save_product.php" method="POST">
-  <label for="classification">Type of Foods</label>
-  <select id="classification" name="type" onchange="updateProducts()" required>
-    <option value="" disabled selected>Select Food Type</option>
-    <option value="Appetizer">Appetizer</option>
-    <option value="Main Course">Main Course</option>
-    <option value="Desserts">Desserts</option>
-    <option value="Drinks">Drinks</option>
-  </select>
 
-  <br><br>
+<header>
+  Orchard Corporation - Add Product
+</header>
 
-  <label for="productname">Select Product</label>
-  <select id="productname" name="productname" required>
-    <option value="" disabled selected>Select Product</option>
-  </select>
+<main>
+  <form action="save_product.php" method="POST">
+    <h2>Add Product</h2>
 
-  <br><br>
+    <label for="classification">Type of Foods</label>
+    <select id="classification" name="type" onchange="updateProducts()" required>
+      <option value="" disabled selected>Select Food Type</option>
+      <option value="Appetizer">Appetizer</option>
+      <option value="Main Course">Main Course</option>
+      <option value="Desserts">Desserts</option>
+      <option value="Drinks">Drinks</option>
+    </select>
 
-  <label for="quantity">Quantity</label>
-  <input type="number" id="quantity" name="quantity" min="1" required>
+    <label for="productname">Select Product</label>
+    <select id="productname" name="productname" required>
+      <option value="" disabled selected>Select Product</option>
+    </select>
 
-  <br><br>
+    <label for="quantity">Quantity</label>
+    <input type="number" id="quantity" name="quantity" min="1" required>
 
-  <button type="submit">Save</button>
-</form>
+    <button type="submit">Save</button>
+  </form>
+
+  <form method="POST">
+    <button type="submit" name="go_import">Go to Import Page</button>
+  </form>
+</main>
+
+<footer>
+  &copy; <?= date("Y") ?> Orchard Corporation. All rights reserved.
+</footer>
 
 <script>
   const foodOptions = {
@@ -122,22 +166,6 @@ if (isset($_POST['go_import'])) {
     }
   }
 </script>
-<form method="POST">
-  <button type="submit" name="go_import" style="
-    width: 400px;
-    background-color: #f1c40f;
-    color: #000;
-    border: none;
-    padding: 12px;
-    font-size: 16px;
-    font-weight: bold;
-    border-radius: 6px;
-    cursor: pointer;
-    display: block;
-    margin: 20px auto 0;
-  ">
-    Go to Import Page
-  </button>
-</form>
+
 </body>
 </html>
