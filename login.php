@@ -132,7 +132,7 @@ $conn->close();
 </head>
 <body>
     <form method="POST" action="login.php">
-        <h2>Login</h2>
+        <h2>Login to Orchard</h2>
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
 

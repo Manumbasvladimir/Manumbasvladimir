@@ -19,12 +19,18 @@ $result = $mysqli->query("SELECT * FROM orders ORDER BY order_time DESC");
   <meta charset="UTF-8" />
   <title>All Orders</title>
   <style>
-    body {
+    html, body {
+      height: 100%;
       margin: 0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background-color: #000;
       color: #FFD700;
-      position: relative; /* Needed for absolute positioning */
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      display: flex;
+      flex-direction: column;
+    }
+
+    body {
+      position: relative;
     }
 
     header {
@@ -33,7 +39,8 @@ $result = $mysqli->query("SELECT * FROM orders ORDER BY order_time DESC");
       text-align: center;
       padding: 20px;
       border-bottom: 2px solid #FFD700;
-      position: relative; /* So button is positioned relative to this */
+      position: relative;
+      flex-shrink: 0;
     }
 
     h1 {
@@ -63,6 +70,8 @@ $result = $mysqli->query("SELECT * FROM orders ORDER BY order_time DESC");
 
     main {
       padding: 30px;
+      flex: 1;
+      overflow-y: auto;
     }
 
     table {
@@ -93,7 +102,7 @@ $result = $mysqli->query("SELECT * FROM orders ORDER BY order_time DESC");
       text-align: center;
       padding: 15px;
       border-top: 1px solid #FFD700;
-      margin-top: 40px;
+      flex-shrink: 0;
     }
   </style>
 </head>

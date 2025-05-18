@@ -37,12 +37,20 @@ $result = $conn->query($sql);
 <head>
     <title>Approve Employees</title>
     <style>
-        body {
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
             background-color: #000;
             color: #FFD700;
             font-family: Arial, sans-serif;
-            padding: 0;
-            margin: 0;
+        }
+
+        .container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .top-bar {
@@ -107,41 +115,53 @@ $result = $conn->query($sql);
         a.button.reject:hover {
             background-color: darkred;
         }
+
+        footer {
+            background-color: #111;
+            color: #FFD700;
+            text-align: center;
+            padding: 15px;
+            border-top: 1px solid #FFD700;
+        }
     </style>
 </head>
 <body>
+<div class="container">
+    <div class="top-bar">
+        <a href="admin_dashboard.php">← Back to Dashboard</a>
+    </div>
 
-<div class="top-bar">
-    <a href="admin_dashboard.php">← Back to Dashboard</a>
+    <h2>Pending Employee Approvals</h2>
+
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Contact</th>
+            <th>Username</th>
+            <th>Actions</th>
+        </tr>
+        <?php if ($result->num_rows > 0): ?>
+            <?php while($row = $result->fetch_assoc()): ?>
+                <tr>
+                    <td><?= $row['id'] ?></td>
+                    <td><?= htmlspecialchars($row['firstname'] . ' ' . $row['lastname']) ?></td>
+                    <td><?= htmlspecialchars($row['contact']) ?></td>
+                    <td><?= htmlspecialchars($row['username']) ?></td>
+                    <td>
+                        <a class="button" href="?approve=<?= $row['id'] ?>">Approve</a>
+                        <a class="button reject" href="?reject=<?= $row['id'] ?>">Reject</a>
+                    </td>
+                </tr>
+            <?php endwhile; ?>
+        <?php else: ?>
+            <tr><td colspan="5">No pending employees found.</td></tr>
+        <?php endif; ?>
+    </table>
 </div>
 
-<h2>Pending Employee Approvals</h2>
-
-<table>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Contact</th>
-        <th>Username</th>
-        <th>Actions</th>
-    </tr>
-    <?php if ($result->num_rows > 0): ?>
-        <?php while($row = $result->fetch_assoc()): ?>
-            <tr>
-                <td><?= $row['id'] ?></td>
-                <td><?= $row['firstname'] . ' ' . $row['lastname'] ?></td>
-                <td><?= $row['contact'] ?></td>
-                <td><?= $row['username'] ?></td>
-                <td>
-                    <a class="button" href="?approve=<?= $row['id'] ?>">Approve</a>
-                    <a class="button reject" href="?reject=<?= $row['id'] ?>">Reject</a>
-                </td>
-            </tr>
-        <?php endwhile; ?>
-    <?php else: ?>
-        <tr><td colspan="5">No pending employees found.</td></tr>
-    <?php endif; ?>
-</table>
-
+<footer>
+    &copy; <?= date("Y") ?> Orchard Corporation. All rights reserved.
+</footer>
 </body>
 </html>
