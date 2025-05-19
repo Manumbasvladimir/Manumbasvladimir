@@ -1,9 +1,3 @@
-<?php
-if (isset($_POST['go_import'])) {
-  header("Location: import.php");
-  exit();
-}
-?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -34,6 +28,24 @@ if (isset($_POST['go_import'])) {
       font-size: 24px;
       font-weight: bold;
       border-bottom: 1px solid #f1c40f;
+      position: relative;
+    }
+
+    .inventory-link {
+      position: absolute;
+      top: 20px;
+      right: 30px;
+      background-color: #f1c40f;
+      color: #000;
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      transition: background-color 0.3s ease;
+    }
+
+    .inventory-link:hover {
+      background-color: #d4ac0d;
     }
 
     main {
@@ -107,6 +119,7 @@ if (isset($_POST['go_import'])) {
 
 <header>
   Orchard Corporation - Add Product
+  <a href="inventory.php" class="inventory-link">Inventory</a>
 </header>
 
 <main>
@@ -131,10 +144,6 @@ if (isset($_POST['go_import'])) {
     <input type="number" id="quantity" name="quantity" min="1" required>
 
     <button type="submit">Save</button>
-  </form>
-
-  <form method="POST">
-    <button type="submit" name="go_import">Go to Import Page</button>
   </form>
 </main>
 

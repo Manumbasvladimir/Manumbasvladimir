@@ -1,4 +1,3 @@
-
 <?php
 $mysqli = new mysqli("localhost", "root", "", "user_registration");
 
@@ -6,7 +5,7 @@ if ($mysqli->connect_error) {
     die("Connection failed: " . $mysqli->connect_error);
 }
 
-$id = $_GET['id'];
+$id = isset($_GET['id']) ? intval($_GET['id']) : 0;
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $new_price = $_POST['price'];
@@ -15,12 +14,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bind_param("di", $new_price, $id);
     $stmt->execute();
 
-    header("Location: inventory.php"); // redirect back
+    header("Location: inventory.php");
     exit();
 }
 
 $result = $mysqli->query("SELECT * FROM menu_items WHERE id = $id");
 $row = $result->fetch_assoc();
+
+if (!$row) {
+    die("Product not found.");
+}
 ?>
 
 <!DOCTYPE html>
@@ -36,6 +39,32 @@ $row = $result->fetch_assoc();
       padding: 40px;
     }
 
+    .header {
+      position: relative;
+      text-align: center;
+      margin-bottom: 30px;
+      font-size: 24px;
+      font-weight: bold;
+    }
+
+    .inventory-link {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background-color: #f1c40f;
+      color: #000;
+      padding: 8px 16px;
+      border-radius: 6px;
+      text-decoration: none;
+      font-weight: bold;
+      margin: 10px;
+      transition: background-color 0.3s ease;
+    }
+
+    .inventory-link:hover {
+      background-color: #d4ac0d;
+    }
+
     form {
       max-width: 400px;
       margin: auto;
@@ -47,6 +76,7 @@ $row = $result->fetch_assoc();
 
     h2 {
       text-align: center;
+      margin-bottom: 20px;
     }
 
     label {
@@ -83,6 +113,11 @@ $row = $result->fetch_assoc();
   </style>
 </head>
 <body>
+
+<div class="header">
+  Edit Product Price
+  <a href="inventory.php" class="inventory-link">Inventory</a>
+</div>
 
 <form method="POST">
   <h2>Edit Price for <?= htmlspecialchars($row['name']) ?></h2>

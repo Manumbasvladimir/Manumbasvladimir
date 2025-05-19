@@ -128,6 +128,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'Admin') {
             padding: 15px;
             border-top: 1px solid #FFD700;
         }
+        
     </style>
 </head>
 <body>
@@ -138,7 +139,7 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'Admin') {
     <a href="inventory.php">Manage Inventory</a>
     <a href="view_orders.php">View Orders</a>
     <a href="sales_reports.php">Sales Reports</a>
-
+     <a href="addnewproduct.php">Add New Product</a>
     <div class="logout">
         <a href="logout.php">Logout</a>
     </div>
@@ -167,6 +168,10 @@ if (!isset($_SESSION['user_type']) || $_SESSION['user_type'] !== 'Admin') {
             <div class="card">
                 <h3>Sales Reports</h3>
                 <p>Analyze total and daily sales statistics.</p>
+            </div>
+              <div class="card">
+                <h3>Add New Product</h3>
+                <p>Can add new product to offer</p>
             </div>
         </div>
     </div>
